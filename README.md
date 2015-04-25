@@ -12,7 +12,7 @@ Copyright (c) 2014 Uber Technologies, Inc.
 # Build
 
 Dependencies:
-- automake
+- automake (>= 1.11)
 - pkg-config
 - libev (>= 4.11)
 - libyaml
