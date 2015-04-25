@@ -1,6 +1,7 @@
 AC_PREREQ([2.68])
 AC_INIT([statsrelay], m4_esyscmd([tr -d '\n' < VERSION]))
 AM_INIT_AUTOMAKE([-Wall -Werror foreign subdir-objects])
+AM_SILENT_RULES([yes])
 AC_USE_SYSTEM_EXTENSIONS
 AC_CONFIG_HEADERS([config.h])
 
