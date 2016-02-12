@@ -17,6 +17,7 @@ AC_CHECK_HEADERS([ev.h], [], [AC_MSG_ERROR([unable to find header ev.h])])
 AC_CHECK_HEADERS([yaml.h], [], [AC_MSG_ERROR([unable to find header yaml.h])])
 
 # Checks for typedefs, structures, and compiler characteristics.
+AC_CHECK_HEADER_STDBOOL
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
