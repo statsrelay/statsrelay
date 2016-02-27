@@ -12,12 +12,11 @@ AM_PROG_CC_C_O
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([arpa/inet.h fcntl.h inttypes.h netdb.h netinet/in.h stddef.h stdint.h stdlib.h string.h sys/socket.h sys/time.h syslog.h unistd.h])
+AC_CHECK_HEADERS([arpa/inet.h fcntl.h inttypes.h netdb.h netinet/in.h stddef.h stdint.h stdbool.h stdlib.h string.h sys/socket.h sys/time.h syslog.h unistd.h])
 AC_CHECK_HEADERS([ev.h], [], [AC_MSG_ERROR([unable to find header ev.h])])
 AC_CHECK_HEADERS([yaml.h], [], [AC_MSG_ERROR([unable to find header yaml.h])])
 
 # Checks for typedefs, structures, and compiler characteristics.
-AC_CHECK_HEADER_STDBOOL
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
 AC_TYPE_SSIZE_T
