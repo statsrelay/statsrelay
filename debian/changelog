@@ -1,3 +1,9 @@
+statsrelay (1.6.9-1) unstable; urgency=medium
+
+  * New upstream release
+
+ -- Jeremy Grosser <jeremy@synack.me>  Wed, 04 Jan 2017 09:36:13 -0800
+
 statsrelay (1.6.8-1) unstable; urgency=medium
 
   * New upstream release
