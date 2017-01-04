@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: carbon
+  name: carbon
+  namespace: default
+spec:
+  ports:
+  - name: "carbon"
+    port: 9999
+    targetPort: 9999
+    protocol: TCP
+  selector:
+    run: carbon
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: statsrelay
+  name: statsrelay
+  namespace: default
+spec:
+  ports:
+  - name: "statsrelay"
+    port: 9999
+    targetPort: 9999
+    protocol: TCP
+  selector:
+    run: statsrelay

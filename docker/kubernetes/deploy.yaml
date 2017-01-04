@@ -1,0 +1,60 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  labels:
+    run: statsrelay
+  name: statsrelay
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: statsrelay
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        run: statsrelay
+    spec:
+      containers:
+      - image: "synack/statsrelay"
+        imagePullPolicy: Always
+        name: statsrelay
+        env:
+        - name: STATSRELAY_CONFIG_URL
+          value: "https://gist.githubusercontent.com/JeremyGrosser/c06b6616f7e08f7e8c626c9eb6a6c6f2/raw/804763eedfb2db32edf4f81e501253c38c2a696e/statsrelay.yaml"
+        args: ["-v"]
+        ports:
+        - containerPort: 9999
+          protocol: TCP
+        - containerPort: 9999
+          protocol: UDP
+        resources:
+          limits:
+            cpu: 10m
+            memory: 64Mi
+          requests:
+            cpu: 10m
+            memory: 8Mi
+        terminationMessagePath: /dev/termination-log
+      #- image: "synack/statsrelay-spam"
+      #  imagePullPolicy: Always
+      #  name: statsgen
+      #  resources:
+      #    limits:
+      #      cpu: 10m
+      #      memory: 16Mi
+      #    requests:
+      #      cpu: 10m
+      #      memory: 8Mi
+      #  terminationMessagePath: /dev/termination-log
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
