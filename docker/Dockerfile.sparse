@@ -1,0 +1,5 @@
+FROM alpine
+RUN apk add --no-cache curl yaml libev
+COPY artifacts/src/statsrelay /usr/local/bin/statsrelay
+COPY artifacts/docker/entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]

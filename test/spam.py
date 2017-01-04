@@ -1,5 +1,6 @@
 import argparse
 import socket
+import time
 
 
 if __name__ == '__main__':
@@ -7,11 +8,13 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--port', type=int, default=8125)
     parser.add_argument('-n', '--num-stats', type=int, default=0)
     parser.add_argument('-r', '--reconnect-interval', type=int, default=0)
+    parser.add_argument('-d', '--delay', type=float, default=0.0)
     parser.add_argument('--word-file')
+    parser.add_argument('host')
     args = parser.parse_args()
 
     sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    sock.connect(('localhost', args.port))
+    sock.connect((args.host, args.port))
 
     reconn = args.reconnect_interval
     count = args.num_stats
@@ -41,6 +44,8 @@ if __name__ == '__main__':
             elif reconn and x % reconn == 0:
                 sock.close()
                 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sock.connect(('localhost', args.port))
+                sock.connect((args.host, args.port))
         if break_out:
             break
+        if args.delay:
+            time.sleep(args.delay)

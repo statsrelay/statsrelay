@@ -1,0 +1,8 @@
+FROM alpine
+RUN apk add --update --no-cache alpine-sdk libev-dev yaml-dev autoconf automake python
+COPY . /statsrelay
+WORKDIR /statsrelay
+RUN ./autogen.sh && ./configure && make
+RUN make check; cat src/test-suite.log
+RUN make install
+CMD ["/usr/local/bin/statsrelay"]

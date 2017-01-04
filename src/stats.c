@@ -165,12 +165,15 @@ static void* make_backend(const char *host_and_port, void *data) {
 	if (tcpclient_init(&backend->client,
 			   server->loop,
 			   backend,
-			   server->config)) {
+			   server->config,
+			   host,
+			   port,
+			   protocol)) {
 		stats_log("stats: failed to tcpclient_init");
 		goto make_err;
 	}
 
-	if (tcpclient_connect(&backend->client, host, port, protocol)) {
+	if (tcpclient_connect(&backend->client)) {
 		stats_log("stats: failed to connect tcpclient");
 		goto make_err;
 	}
@@ -360,7 +363,7 @@ void stats_send_statistics(stats_session_t *session) {
 	buffer_produced(response,
 		snprintf((char *)buffer_tail(response), buffer_spacecount(response),
 		"global last_reload timestamp %" PRIu64 "\n",
-		session->server->last_reload));
+		(unsigned long long)session->server->last_reload));
 
 	buffer_produced(response,
 		snprintf((char *)buffer_tail(response), buffer_spacecount(response),
